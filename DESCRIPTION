@@ -1,0 +1,26 @@
+Package: mantelNSGA2
+Type: Package
+Title: Mantel test permutation search with NSGA2 algorithm
+Version: 0.1
+Description: The `mantelNSGA2` function performs performs a search of possible 
+  explanatory variable combinations resulting in best Mantel test combinations 
+  along a pareto front of increasing explanatory variable number using 
+  NSGA2 (Non-dominated sorting genetic algorithm). 
+Author: Marc Taylor <ningkiling@gmail.com>
+Maintainer: Marc Taylor <ningkiling@gmail.com>
+Depends:
+    R (>= 4.0),
+    BBmisc,
+    smoof,
+    ParamHelpers
+Imports:
+    ecr,
+    vegan,
+    memoise,
+    pracma,
+    checkmate, parallelMap,
+    reshape2
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
