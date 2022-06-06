@@ -2,7 +2,7 @@ Package: mantelNSGA2
 Type: Package
 Title: Mantel test permutation search with NSGA2 algorithm
 Version: 0.1
-Description: The `mantelNSGA2` function performs performs a search of possible 
+Description: The `mantelNSGA2` function performs a search of possible 
   explanatory variable combinations resulting in best Mantel test combinations 
   along a pareto front of increasing explanatory variable number using 
   NSGA2 (Non-dominated sorting genetic algorithm). 
