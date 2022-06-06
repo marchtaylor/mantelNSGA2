@@ -22,7 +22,8 @@ mantelNSGA2(
   p.feat = 1,
   stop.criterion = NULL,
   memoisation = TRUE,
-  ref.point = c(0, 1)
+  ref.point = c(0, 1),
+  verbose = TRUE
 )
 }
 \arguments{
@@ -72,6 +73,8 @@ function calls with the same input paramet}
 
 \item{ref.point}{Vector of length 2, defining the Reference point for the
 Hypervolume Indicator.}
+
+\item{verbose}{logical. Should genetic algorithm progress be printed.}
 }
 \value{
 
@@ -85,21 +88,6 @@ Mantel test permutation search with NSGA2 (Non-dominated
 library(vegan)
 data("varechem")
 data("varespec")
-
-# chance of having few or many "genes" turned on is low, so one ends up
-# mainly exploring the middle
-nvar <- 20
-tmp <- replicate(1000, expr = sum(sample(x = c(0,1), nvar, replace = TRUE)))
-hist(tmp, breaks = seq(0, nvar))
-
-# more extreme when number of genes is high
-nvar <- 100
-tmp <- replicate(1000, expr = sum(sample(x = c(0,1), nvar, replace = TRUE)))
-hist(tmp, breaks = seq(0, nvar))
-
-# consequence is that one needs to simulate for a long time to eventually
-# explore tail regions. Or, starting population should start with a smaller
-# number of genes turned on
 
 
 ### envbio

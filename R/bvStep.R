@@ -34,6 +34,7 @@
 #' @param var.exclude Numeric vector. A vector of column numbers from the variable dataset to always exclude
 #' at the each restart and during the search process.
 #' @param output.best Numeric value. Number of best combinations to return in the results object (Default=10).
+#' @param verbose logical. Should genetic algorithm progress be printed.
 #'
 #' @details The variable multivariate data set has 2^n-1 possible combinations to test, where n is the
 #' number of variables. Testing all variable combinations is thus unrealistic, computationally,
@@ -53,7 +54,6 @@
 #' @importFrom utils flush.console
 #'
 #' @examples
-#' \donttest{
 #'
 #' library(vegan)
 #' data(varespec)
@@ -106,7 +106,6 @@
 #' text(MDS_res$points, as.character(1:length(MDS_res$points[,1])), cex=0.7)
 #' mtext(paste("Stress =",round(MDS_res$stress, 2)), side=3, adj=1, line=0.5)
 #'
-#' }
 #'
 #' @keywords Mantel_test Primer algorithm
 #' @importFrom stats cor.test
@@ -114,17 +113,19 @@
 #'
 #' @export
 #'
-bvStep <- function(fix.mat, var.mat,
-fix.dist.method="bray", var.dist.method="euclidean",
-scale.fix=FALSE, scale.var=TRUE,
-max.rho=0.95,
-min.delta.rho=0.001,
-random.selection=TRUE,
-prop.selected.var=0.2,
-num.restarts=10,
-var.always.include=NULL,
-var.exclude=NULL,
-output.best=10
+bvStep <- function(
+  fix.mat, var.mat,
+  fix.dist.method="bray", var.dist.method="euclidean",
+  scale.fix=FALSE, scale.var=TRUE,
+  max.rho=0.95,
+  min.delta.rho=0.001,
+  random.selection=TRUE,
+  prop.selected.var=0.2,
+  num.restarts=10,
+  var.always.include=NULL,
+  var.exclude=NULL,
+  output.best=10,
+  verbose = TRUE
 ){
 
 	if(dim(fix.mat)[1] != dim(var.mat)[1]){stop("fixed and variable matrices must have the same number of rows")}
@@ -234,8 +235,10 @@ output.best=10
 
 		RES_TOT <- rbind(RES_TOT, RES[2:dim(RES)[1],])
 		# replicate(1, clearConsoleLine())
-		cat(paste(round((i/num.restarts)*100,3), "% finished", "\n"))
-		flush.console()
+		if(verbose){
+		  cat(paste(round((i/num.restarts)*100,3), "% finished", "\n"))
+		  flush.console()
+		}
 	}
 
 	RES_TOT <- unique(RES_TOT[,3:5])

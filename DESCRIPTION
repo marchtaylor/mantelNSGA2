@@ -10,17 +10,19 @@ Author: Marc Taylor <ningkiling@gmail.com>
 Maintainer: Marc Taylor <ningkiling@gmail.com>
 Depends:
     R (>= 4.0),
-    BBmisc,
-    smoof,
-    ParamHelpers
-Imports:
     ecr,
-    vegan,
     memoise,
     pracma,
-    checkmate, parallelMap,
-    reshape2
+    BBmisc (>= 1.6),
+    smoof (>= 1.4),
+    ParamHelpers (>= 1.1)
+Imports:
+    vegan
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

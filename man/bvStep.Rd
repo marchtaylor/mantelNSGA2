@@ -18,7 +18,8 @@ bvStep(
   num.restarts = 10,
   var.always.include = NULL,
   var.exclude = NULL,
-  output.best = 10
+  output.best = 10,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -64,6 +65,8 @@ at the each restart.}
 at the each restart and during the search process.}
 
 \item{output.best}{Numeric value. Number of best combinations to return in the results object (Default=10).}
+
+\item{verbose}{logical. Should genetic algorithm progress be printed.}
 }
 \description{
 The \code{bvStep} function performs Clarke and Ainsworth's (1993) "BVSTEP" routine which is a algorithm that searches for
@@ -83,7 +86,6 @@ Below is an example of a two-step search refinement for searching
 for subsets of variables that best correlate with a fixed multivariate set.
 }
 \examples{
-\donttest{
 
 library(vegan)
 data(varespec)
@@ -136,7 +138,6 @@ plot(bio.fit, col="gray50", p.max=0.1, cex=0.8, font=4) # p.max=0.1
 text(MDS_res$points, as.character(1:length(MDS_res$points[,1])), cex=0.7)
 mtext(paste("Stress =",round(MDS_res$stress, 2)), side=3, adj=1, line=0.5)
 
-}
 
 }
 \references{

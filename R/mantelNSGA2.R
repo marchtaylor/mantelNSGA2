@@ -31,6 +31,7 @@
 #'   function calls with the same input paramet
 #' @param ref.point Vector of length 2, defining the Reference point for the
 #'   Hypervolume Indicator.
+#' @param verbose logical. Should genetic algorithm progress be printed.
 #'
 #' @return
 #' @export
@@ -42,21 +43,6 @@
 #' library(vegan)
 #' data("varechem")
 #' data("varespec")
-#'
-#' # chance of having few or many "genes" turned on is low, so one ends up
-#' # mainly exploring the middle
-#' nvar <- 20
-#' tmp <- replicate(1000, expr = sum(sample(x = c(0,1), nvar, replace = TRUE)))
-#' hist(tmp, breaks = seq(0, nvar))
-#'
-#' # more extreme when number of genes is high
-#' nvar <- 100
-#' tmp <- replicate(1000, expr = sum(sample(x = c(0,1), nvar, replace = TRUE)))
-#' hist(tmp, breaks = seq(0, nvar))
-#'
-#' # consequence is that one needs to simulate for a long time to eventually
-#' # explore tail regions. Or, starting population should start with a smaller
-#' # number of genes turned on
 #'
 #'
 #' ### envbio
@@ -163,7 +149,8 @@ mantelNSGA2 <- function(
   p.feat = 1,
   stop.criterion = NULL,
   memoisation = TRUE,
-  ref.point = c(0,1)
+  ref.point = c(0,1),
+  verbose = TRUE
 ){
 
   if (is.null(offspring.size)) {
@@ -275,10 +262,12 @@ mantelNSGA2 <- function(
       offspring = split(offspr.tmp, seq(nrow(offspr.tmp)))
     }
 
-    cat(paste("NSGA-II | iter =", i, "| pop.size =", length(population),
-      "| offspr.size =", length(offspring)))
-    cat("\n")
-    utils::flush.console()
+    if(verbose){
+      cat(paste("NSGA-II | iter =", i, "| pop.size =", length(population),
+        "| offspr.size =", length(offspring)))
+      cat("\n")
+      utils::flush.console()
+    }
 
     fitness.o = ecr::evaluateFitness(inds = offspring, control = ctrl,
       var.mat = var.mat, fix.dist = fix.dist, var.dist.method = var.dist.method)
@@ -353,4 +342,3 @@ mantelNSGA2 <- function(
   return(ret)
 
 }
-
