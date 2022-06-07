@@ -25,6 +25,8 @@ knitr::opts_chunk$set(
 ```{r setup, warning=FALSE, message=FALSE}
 library(mantelNSGA2)
 library(vegan)
+data("varechem")
+data("varespec")
 ```
 
 
@@ -32,7 +34,8 @@ library(vegan)
 
 bla [@clarke_approach_1994]. @clarke_approach_1994
 total combinations tested by sinkr::bioEnv() 
-`2^ncol(var.mat)-1 =` {r 2^ncol(var.mat)-1}
+
+`r paste("2^ncol(varespec)-1", "=", sprintf("%.2e", 2^ncol(varespec)-1))`
 
 The following tutorial outlines the use of the ELEFAN functions available in TropFishR (`ELEFAN`, `ELEFAN_GA`, and `ELEFAN_SA`). These functions can be used to estimate growth model parameters from length-frequency (lfq) data. The ability to convert length to relative age is the initial step in length-based stock assessment, and underpins subsequent analyses (see the [sinkr package](https://github.com/marchtaylor/sinkr) for a broader overview of length-based stock assessment).
 
@@ -64,9 +67,6 @@ hist(tmp, breaks = seq(0, nvar))
 
 ## EnvBio example
 ```{r envbio_nsga2, message=FALSE}
-data("varechem")
-data("varespec")
-
 # biological community variables that best correlate with environmental data
 fix.mat = varechem
 var.mat = wisconsin(varespec)

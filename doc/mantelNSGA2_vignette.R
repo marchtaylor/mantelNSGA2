@@ -9,6 +9,8 @@ knitr::opts_chunk$set(
 ## ----setup, warning=FALSE, message=FALSE--------------------------------------
 library(mantelNSGA2)
 library(vegan)
+data("varechem")
+data("varespec")
 
 ## -----------------------------------------------------------------------------
 # chance of having few or many "genes" turned on is low, so one ends up
@@ -24,9 +26,6 @@ hist(tmp, breaks = seq(0, nvar))
 
 
 ## ----envbio_nsga2, message=FALSE----------------------------------------------
-data("varechem")
-data("varespec")
-
 # biological community variables that best correlate with environmental data
 fix.mat = varechem
 var.mat = wisconsin(varespec)
