@@ -13,16 +13,16 @@ val2col(z, zlim, col = hcl.colors(12, "YlOrRd", rev = TRUE), breaks)
 
 \item{col}{Vector of color values}
 
-\item{breaks}{Break points for color changes. If breaks is specified then \code{zlim} 
-is unused and the algorithm used follows \code{\link[base]{cut}}, so intervals are 
-closed on the right and open on the left except for the lowest interval 
+\item{breaks}{Break points for color changes. If breaks is specified then \code{zlim}
+is unused and the algorithm used follows \code{\link[base]{cut}}, so intervals are
+closed on the right and open on the left except for the lowest interval
 which is closed at both ends.}
 }
 \description{
-The \code{val2col} function converts a vector of values("z") 
-to a vector of color levels. One must define the number of colors. 
-The limits of the color scale ("zlim") or the break points for the 
-color changes("breaks") can also be defined. When breaks and zlim are 
+The \code{val2col} function converts a vector of values("z")
+to a vector of color levels. One must define the number of colors.
+The limits of the color scale ("zlim") or the break points for the
+color changes("breaks") can also be defined. When breaks and zlim are
 defined, breaks overrides zlim. All arguments are similar to those in the
 \code{image} function.
 }
@@ -48,7 +48,7 @@ plot(x,y, pch=21, bg=Col)
 abline(h=c(-Inf, -2, -1, 0, 1, 2, Inf), col=8, lty=2)
 
 # by default, image() and val2col() use the same palette
-grd <- expand.grid(x = seq(0, 1, length.out = nrow(volcano)), 
+grd <- expand.grid(x = seq(0, 1, length.out = nrow(volcano)),
   y = seq(0, 1, length.out = ncol(volcano)))
 grd$z <- c(volcano)
 image(volcano)
