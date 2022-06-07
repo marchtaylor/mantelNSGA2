@@ -1,7 +1,8 @@
 ---
 title: "mantelNSGA vignette"
 output:
-  rmarkdown::html_vignette:
+  #rmarkdown::html_vignette:
+  rmarkdown::pdf_document:
     fig_caption: yes
     number_sections: true
     df_print: kable
