@@ -4,7 +4,7 @@
 \alias{val2col}
 \title{Convert values to color levels}
 \usage{
-val2col(z, zlim, col = hcl.colors(12, "YlOrRd", rev = TRUE), breaks)
+val2col(z, zlim, col = grDevices::hcl.colors(12, "YlOrRd", rev = TRUE), breaks)
 }
 \arguments{
 \item{z}{A vector of values (default is 12 colors from the \code{\link[grDevices]{hcl.colors}} palette).}
