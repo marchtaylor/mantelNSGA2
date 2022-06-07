@@ -1,5 +1,5 @@
 ---
-title: "mantelNSGA vignette"
+title: "mantelNSGA2 vignette"
 output:
   #rmarkdown::html_vignette:
   rmarkdown::pdf_document:
@@ -7,7 +7,7 @@ output:
     number_sections: true
     df_print: kable
 vignette: >
-  %\VignetteIndexEntry{mantelNSGA_vignette}
+  %\VignetteIndexEntry{mantelNSGA2_vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: mantelNSGA2.bib
