@@ -33,7 +33,7 @@
 #'   Hypervolume Indicator.
 #' @param verbose logical. Should genetic algorithm progress be printed.
 #'
-#' @return
+#' @return object of class mantelNSGA2
 #' @export
 #'
 #' @importFrom vegan vegdist

@@ -1,3 +1,4 @@
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 [![Travis-CI Build Status](https://travis-ci.com/marchtaylor/sinkr.svg?branch=master)](https://travis-ci.com/marchtaylor/mantelNSGA2) [![GitHub release](https://img.shields.io/github/release/marchtaylor/mantelNSGA2.svg)](https://github.com/marchtaylor/mantelNSGA2/releases)
 
 # mantelNSGA2

@@ -13,9 +13,12 @@
 #' @param parFrontT  bla
 #'
 #' @return a plot
+#' @method plot mantelNSGA2
+#'
 #' @export
 #'
 #' @importFrom graphics points
+#' @importFrom grDevices hcl.colors
 #'
 #' @examples
 #'

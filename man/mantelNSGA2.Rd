@@ -77,7 +77,7 @@ Hypervolume Indicator.}
 \item{verbose}{logical. Should genetic algorithm progress be printed.}
 }
 \value{
-
+object of class mantelNSGA2
 }
 \description{
 Mantel test permutation search with NSGA2 (Non-dominated

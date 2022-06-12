@@ -19,10 +19,10 @@ Depends:
     ParamHelpers (>= 1.1)
 Imports:
     vegan
-License: GPL-3
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Suggests: 
     knitr,
     rmarkdown

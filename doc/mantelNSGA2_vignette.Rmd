@@ -29,23 +29,29 @@ data("varechem")
 data("varespec")
 ```
 
-
 # Introduction
 
-bla [@clarke_approach_1994]. @clarke_approach_1994
-total combinations tested by sinkr::bioEnv() 
+The **mantelNSGA2** package was created to facilitate the efficient search of explanatory variables for use in a BIOENV-like analysis [@clarke_method_1993]. BIOENV explores the correlation between two multivariate data sets via a [Mantel test](https://en.wikipedia.org/wiki/Mantel_test) according to pairwise similarity (or distance) values between samples. One of the data sets is *fixed*, i.e. all variables are includes in the similarity matrix, while all combinations of the other data set's variables are *varied* to try and identify subsets of best correlating ones. Correlations may be based either on Pearson or Spearman correlations, with the latter being preferred in community analysis due to it's non-parametric nature. Likewise, choice of similarity metrics may also be important in non-parametric situations (e.g. Bray-Curtis).
 
-`r paste("2^ncol(varespec)-1", "=", sprintf("%.2e", 2^ncol(varespec)-1))`
+The vegan package's \code{\link[vegan]{bioenv}} function assumes BIOENV setup, and the similarity matrix of environmental data is assumed to be based on normalized "euclidean" distances. This makes sense with environmental data where one normalizes the data to remove the effect of differing units between parameters, yet in cases where the variable matrix is biological, one might want more flexibility (a Bray-Curtis measure of similarity is common given its non-parametric nature). For example, beyond the typical biological to environmental comparison (BIOENV setup), one can also use the routine to explore other other types of relationships; e.g.:
 
-The following tutorial outlines the use of the ELEFAN functions available in TropFishR (`ELEFAN`, `ELEFAN_GA`, and `ELEFAN_SA`). These functions can be used to estimate growth model parameters from length-frequency (lfq) data. The ability to convert length to relative age is the initial step in length-based stock assessment, and underpins subsequent analyses (see the [sinkr package](https://github.com/marchtaylor/sinkr) for a broader overview of length-based stock assessment).
+-   ENVBIO: subset of biological variables that best correlate to the overall environmental pattern
+-   BIOBIO: subset of biological variables that best correlate to the overall biological pattern
+-   ENVENV: subset of environmental variables that best correlate to the overall environmental pattern
 
-The growth model presently implemented within TropFishR is the von Bertalanffy growth function (VBGF),
+It is important to mention that one of the reasons why a variable biological similarity matrix is often less explored with the routine is that the number of possible subset combinations becomes computationally overwhelming when the number of species/groups is large - the total number of combinations being equal to 2\^n - 1, where n is the total number of variables. For this reason, Clarke and Warwick (1998) presented a stepwise routine (BVSTEP) (see \code{\link[mantelNSGA2]{bvStep}} for more efficient exploration of the subset combinations).
 
-$$ L_{t} = L_{\infty} (1-\exp(-K(t-t_0))), $$
+which typically contains environmental variables (*ENV*), against that of the o and evaluate which subset of variables produced the highest correlation with a fixed. The non-parametric nature of biom
 
-where $L_t$ is length-at-age $t$, $L_\infty$ is asymptotic length, $K$ is the von Bertalanffy growth constant, and $t_0$ is the theoretical age when length equals zero. $t_0$ is usually negative, resulting in a positive length at the time of recruitment (t = 0). In TropFishR, these parameters are referred to as `Linf`, `K`, and `t0`.
+The BIOENV approach typically focuses on used to evaluate whether a subset of environmental variables
 
-The following plot shows the basic form of the VBGF under varying K settings:
+The typical setup for BIOENV is to explore subsets of environmental variables that best correlate to sample similarities of the biological community (e.g. species biomass or abundance), called "BIOENV". In this case, the similarity matrix of the community is fixed, while subsets of the environmental variables are used in the calculation of the environmental similarity matrix. A correlation coefficient (typically Spearman rank correlation coefficient, "rho") is then calculated between the two matrices and the best subset of environmental variables can then be identified and further subjected to a permutation test to determine significance.
+
+bla [@clarke_approach_1994]. @clarke_approach_1994 total combinations tested by sinkr::bioEnv()
+
+`r paste("2^44-1", "=", sprintf("%.2e", 2^ncol(varespec)-1))`
+
+# Under construction...
 
 ```{r}
 # chance of having few or many "genes" turned on is low, so one ends up
@@ -61,11 +67,8 @@ hist(tmp, breaks = seq(0, nvar))
 
 ```
 
+## ENVBIO example
 
-
-
-
-## EnvBio example
 ```{r envbio_nsga2, message=FALSE}
 # biological community variables that best correlate with environmental data
 fix.mat = varechem
@@ -91,7 +94,6 @@ plot(fitGA, parFrontT = "o")
 
 ```
 
-
 ```{r envbio_nsga2_vs_bvstep, warning=FALSE}
 # Compare to bvStep
 set.seed(1111)
@@ -110,11 +112,8 @@ plot(fitGA, parFrontT = "o")
 points(-fitBV$order.by.i.comb$rho, fitBV$order.by.i.comb$n.var/ncol(var.mat), pch = 1, col = 4, t = "o")
 ```
 
+## BIOBIO example
 
-
-
-
-## BioBio example
 ```{r biobio_nsga2, message=FALSE}
 # biological community variables that best correlate with the
 # overall biological community
@@ -141,7 +140,6 @@ plot(fitGA2, parFrontT = "o")
 
 ```
 
-
 ```{r biobio_nsga2_vs_bvstep, warning=FALSE}
 # Compare to bvStep
 set.seed(1111)
@@ -160,9 +158,5 @@ fitBV2 <- bvStep(
 plot(fitGA2, parFrontT = "o")
 points(-fitBV2$order.by.i.comb$rho, fitBV2$order.by.i.comb$n.var/ncol(var.mat), pch = 1, col = 4, t = "o")
 ```
-
-
-
-
 
 # References
