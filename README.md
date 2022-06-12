@@ -1,4 +1,4 @@
-[![Travis-CI Build Status](https://travis-ci.org/marchtaylor/sinkr.svg?branch=master)](https://travis-ci.org/marchtaylor/mantelNSGA2) [![GitHub release](https://img.shields.io/github/release/marchtaylor/mantelNSGA2.svg)](https://github.com/marchtaylor/mantelNSGA2/releases)
+[![Travis-CI Build Status](https://travis-ci.com/marchtaylor/sinkr.svg?branch=master)](https://travis-ci.com/marchtaylor/mantelNSGA2) [![GitHub release](https://img.shields.io/github/release/marchtaylor/mantelNSGA2.svg)](https://github.com/marchtaylor/mantelNSGA2/releases)
 
 # mantelNSGA2
 
