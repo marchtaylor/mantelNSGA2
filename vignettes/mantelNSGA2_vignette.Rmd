@@ -55,6 +55,11 @@ The BIO-ENV methodology involves an exhaustive testing of all possible combinati
 The number of resulting combinations per subset of variables is dome-shaped, such that many more combinations exist when ca 50% of variables are used. The steepness of this dome is more extreme for a higher number of variables:
 
 ```{r}
+trapzfun <- function(x, y){
+  idx = 2:length(x)
+  return(as.double((x[idx] - x[idx - 1]) %*% (y[idx] + y[idx - 
+    1]))/2)
+} 
 nvar <- c(8, 10, 12, 14, 16)
 RES <- vector("list", length(nvar))
 names(RES) <- nvar
@@ -63,7 +68,7 @@ for(j in seq(nvar)){
   for(i in seq(res)){
     res[i] <- ncol(combn(seq(length(res)), i))
   }
-  RES[[j]] <- res/caTools::trapz(x = seq(res)/length(res), y = res)
+  RES[[j]] <- res/trapzfun(x = seq(res)/length(res), y = res)
 }
 
 ylim = c(0, max(do.call("c", RES)))
