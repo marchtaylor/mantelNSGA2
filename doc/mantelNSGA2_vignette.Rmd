@@ -7,7 +7,7 @@ output:
     number_sections: true
     df_print: kable
 vignette: >
-  %\VignetteIndexEntry{mantelNSGA2_vignette}
+  %\VignetteIndexEntry{mantelNSGA2 vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: mantelNSGA2.bib
@@ -25,8 +25,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-devtool
-
 ```{r setup, warning=FALSE, message=FALSE}
 library(mantelNSGA2)
 library(vegan)
@@ -40,7 +38,7 @@ data("varespec")
 
 The **mantelNSGA2** package was created to facilitate the efficient search of explanatory variables for use in a BIOENV-like analysis [@clarke_method_1993]. BIO-ENV explores the correlation between two multivariate data sets via a [Mantel test](https://en.wikipedia.org/wiki/Mantel_test) according to pairwise similarity (or distance) values between samples. One of the data sets is *fixed*, i.e. all variables are includes in its similarity matrix, while the other data set's variables are *varied* across all combinations to try and identify subsets variables whose similarity best correlates to that of the fixed data set similarity. Correlations may be based either on Pearson or Spearman correlations, with the latter being preferred in community analysis due to it's non-parametric nature. Likewise, choice of similarity metrics may also be important in non-parametric situations (e.g. Bray-Curtis similarity).
 
-The vegan package's \code{\link[vegan]{bioenv}} function assumes the typical BIO-ENV setup, i.e. a fixed biological data set and a variable environmental data set whose similarity matrix is based on normalized Euclidean distance. This makes sense with environmental data where one normalizes the data to remove the effect of differing units between parameters. The fixed biological data similarity uses the non-parametric Bray-Curtis similarity by default, but other metrics may be used.
+The vegan package's `bioenv` function assumes the typical BIO-ENV setup, i.e. a fixed biological data set and a variable environmental data set whose similarity matrix is based on normalized Euclidean distance. This makes sense with environmental data where one normalizes the data to remove the effect of differing units between parameters. The fixed biological data similarity uses the non-parametric Bray-Curtis similarity by default, but other metrics may be used.
 
 Beyond the typical BIO-ENV configuration, other types exist that require additional flexibility in defining the similarity metrics of both data sets:
 
@@ -51,9 +49,10 @@ Beyond the typical BIO-ENV configuration, other types exist that require additio
 This flexibility is allowed by the `bioEnv` function of the [sinkr](https://github.com/marchtaylor/sinkr), which is also included in `mantelNSGA2`, through arguments `fix.dist.method` and `var.dist.method`.
 
 ## Efficient search with BV-STEP
-The BIO-ENV methodology involves an exhaustive testing of all possible combinations of the variable data set. For some analysis, e.g. BIO-BIO involving a large number of taxa, this may result in a an unrealistically-large number of tests ($2^n - 1$). For this reason, @clarke_quantifying_1998 presented a stepwise routine, called *BV-STEP* (see `bvStep`) for more efficient exploration of the subset combinations. The method employs a *forward-backward* search approach to adding/removing variables. When many variables exist, it is also recommended to only start with a much smaller subset for the start of the stepwise procedure (e.g. `random.selection = TRUE` and `prop.selected.var = 0.1` for using 10\% of randomly-selected variables at each start).
 
-The number of resulting combinations per subset of variables is dome-shaped, such that many more combinations exist when ca 50\% of variables are used. The steepness of this dome is more extreme for a higher number of variables:
+The BIO-ENV methodology involves an exhaustive testing of all possible combinations of the variable data set. For some analysis, e.g. BIO-BIO involving a large number of taxa, this may result in a an unrealistically-large number of tests ($2^n - 1$). For this reason, @clarke_quantifying_1998 presented a stepwise routine, called *BV-STEP* (see `bvStep`) for more efficient exploration of the subset combinations. The method employs a *forward-backward* search approach to adding/removing variables. When many variables exist, it is also recommended to only start with a much smaller subset for the start of the stepwise procedure (e.g. `random.selection = TRUE` and `prop.selected.var = 0.1` for using 10% of randomly-selected variables at each start).
+
+The number of resulting combinations per subset of variables is dome-shaped, such that many more combinations exist when ca 50% of variables are used. The steepness of this dome is more extreme for a higher number of variables:
 
 ```{r}
 nvar <- c(8, 10, 12, 14, 16)
@@ -80,14 +79,13 @@ legend("topright", legend = rev(nvar), col = rev(seq(nvar)), lty = 1, title = "V
 
 $$\\[0in]$$
 
-For most analysis, it is of interest to be able to quantify the relative importance of variables best correlating to the fixed data set. In `bioEnv`and `bvStep`, results are reported in terms of the best correlating combinations and best model per number of variables, which may help in defining the most parsimonious models. Thus, identifying simpler models containing less variables are likely to be of higher priority than higher order combinations where improvements to correlation are marginal. For `bvStep`, a typical strategy might be to include only a small proportion of variables at each restart in order to efficiently explore the lower parameter space. 
+For most analysis, it is of interest to be able to quantify the relative importance of variables best correlating to the fixed data set. In `bioEnv`and `bvStep`, results are reported in terms of the best correlating combinations and best model per number of variables, which may help in defining the most parsimonious models. Thus, identifying simpler models containing less variables are likely to be of higher priority than higher order combinations where improvements to correlation are marginal. For `bvStep`, a typical strategy might be to include only a small proportion of variables at each restart in order to efficiently explore the lower parameter space.
 
 ## Efficient search with mantelNSGA2
 
 An more efficient search is offered by `mantelNSGA2` by means of a [genetic algorithm](https://en.wikipedia.org/wiki/Genetic_algorithm) search combined with the concept of a [Pareto front](https://en.wikipedia.org/wiki/Pareto_front), used to focus the search on the most parsimonious model configurations. The genetic algorithm is used to identify the best scoring combinations of the variable data set, coded by "genes" for their inclusion in each individual of the population. Only the individuals with the best genetic "fitness" are permitted to contribute to the next generation of offspring, which may contain new genetic coding of variable combinations.
 
 Similar to the demonstration above regarding the number of possible combinations by complexity, a random selection of initial gene combinations in the starting population would produce a bias towards intermediate complexity:
-
 
 ```{r}
 op <- par(mfcol = c(1,2))
@@ -141,11 +139,6 @@ plot(fitGA, parFrontT = "o")
 ```{r}
 fitGA$pareto.solution
 ```
-
-
-
-
-
 
 ```{r envbio_nsga2_vs_bvstep, warning=FALSE}
 # Compare to bvStep

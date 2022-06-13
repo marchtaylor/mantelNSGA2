@@ -356,7 +356,6 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<p>devtool</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mantelNSGA2)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;varechem&quot;</span>)</span>
@@ -381,13 +380,13 @@ correlations, with the latter being preferred in community analysis due
 to it’s non-parametric nature. Likewise, choice of similarity metrics
 may also be important in non-parametric situations (e.g. Bray-Curtis
 similarity).</p>
-<p>The vegan package’s function assumes the typical BIO-ENV setup,
-i.e. a fixed biological data set and a variable environmental data set
-whose similarity matrix is based on normalized Euclidean distance. This
-makes sense with environmental data where one normalizes the data to
-remove the effect of differing units between parameters. The fixed
-biological data similarity uses the non-parametric Bray-Curtis
-similarity by default, but other metrics may be used.</p>
+<p>The vegan package’s <code>bioenv</code> function assumes the typical
+BIO-ENV setup, i.e. a fixed biological data set and a variable
+environmental data set whose similarity matrix is based on normalized
+Euclidean distance. This makes sense with environmental data where one
+normalizes the data to remove the effect of differing units between
+parameters. The fixed biological data similarity uses the non-parametric
+Bray-Curtis similarity by default, but other metrics may be used.</p>
 <p>Beyond the typical BIO-ENV configuration, other types exist that
 require additional flexibility in defining the similarity metrics of
 both data sets:</p>
