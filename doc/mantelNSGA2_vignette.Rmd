@@ -55,6 +55,11 @@ The BIO-ENV methodology involves an exhaustive testing of all possible combinati
 The number of resulting combinations per subset of variables is dome-shaped, such that many more combinations exist when ca 50% of variables are used. The steepness of this dome is more extreme for a higher number of variables:
 
 ```{r}
+trapzfun <- function(x, y){
+  idx = 2:length(x)
+  return(as.double((x[idx] - x[idx - 1]) %*% (y[idx] + y[idx - 
+    1]))/2)
+} 
 nvar <- c(8, 10, 12, 14, 16)
 RES <- vector("list", length(nvar))
 names(RES) <- nvar
@@ -63,7 +68,7 @@ for(j in seq(nvar)){
   for(i in seq(res)){
     res[i] <- ncol(combn(seq(length(res)), i))
   }
-  RES[[j]] <- res/caTools::trapz(x = seq(res)/length(res), y = res)
+  RES[[j]] <- res/trapzfun(x = seq(res)/length(res), y = res)
 }
 
 ylim = c(0, max(do.call("c", RES)))
@@ -105,7 +110,7 @@ par(op)
 
 $$\\$$
 
-Therefore, the `mantelNSGA2` approach initializes only single or a few genes in the initial population to again more fully explore parsimonious solutions before moving on to more complex ones. The NSGA2 approach also ensures that leading candidate solutions along the Pareto (i.e. for each level of model complexity) are carried on to the next generation and allowed to reproduce. To further improve the search efficiency, [memoization](https://en.wikipedia.org/wiki/Memoization) is used to store tested genetic combinations and prevent repeated evaluations in later generations. The following examples present two different configurations, ENV-BIO and BIO-BIO, comparing the performance between `bvStep` and `mantelNSGA2`. Both examples use data from the ´vegan´ package; specifically, the environmental `varechem` data (n = 14 variables) and the biological `varespec` data (n = 44 variables). The biological data is used as the variable set in both examples. A full BIO-ENV exploration would require $n = 2^{44} = 1.76e+13$ combinations, making such an analysis unreasonable.
+Therefore, the `mantelNSGA2` approach initializes only single or a few genes in the initial population to again more fully explore parsimonious solutions before moving on to more complex ones. The NSGA2 approach also ensures that leading candidate solutions along the Pareto (i.e. for each level of model complexity) are carried on to the next generation and allowed to reproduce. To further improve the search efficiency, [memoization](https://en.wikipedia.org/wiki/Memoization) is used to store tested genetic combinations and prevent repeated evaluations in later generations. The following examples present two different configurations, ENV-BIO and BIO-BIO, comparing the performance between `bvStep` and `mantelNSGA2`. Both examples use data from the ´vegan´ package; specifically, the environmental `varechem` data (n = 14 variables) and the biological `varespec` data (n = 44 variables). The biological data is used as the variable set in both examples. A full BIO-ENV exploration would require $n = 2^{44}-1 = 1.76e13$ combinations, making such an analysis unreasonable.
 
 # Examples
 
