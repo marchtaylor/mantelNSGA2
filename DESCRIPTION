@@ -7,17 +7,21 @@ Description: The `mantelNSGA2` function performs a search of possible
   explanatory variable combinations resulting in best Mantel test combinations 
   along a pareto front of increasing explanatory variable number using 
   NSGA2 (Non-dominated sorting genetic algorithm). 
-Author: Marc Taylor <ningkiling@gmail.com>
-Maintainer: Marc Taylor <ningkiling@gmail.com>
+Authors@R: 
+    person(given = "Marc",
+           family = "Taylor",
+           role = c("aut", "cre"),
+           email = "ningkiling@gmail.com",
+           comment = c(ORCID = "0000-0001-9730-6994"))
 Depends:
     R (>= 4.0),
-    ecr,
-    memoise,
-    pracma,
+    ecr (>= 2.1.0),
     BBmisc (>= 1.6),
-    smoof (>= 1.4),
+    smoof (>= 1.4), 
     ParamHelpers (>= 1.1)
 Imports:
+    memoise,
+    pracma,
     vegan
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
