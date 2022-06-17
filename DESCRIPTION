@@ -13,6 +13,8 @@ Authors@R:
            role = c("aut", "cre"),
            email = "ningkiling@gmail.com",
            comment = c(ORCID = "0000-0001-9730-6994"))
+Author: 
+    Marc Taylor [aut, cre]
 Depends:
     R (>= 4.0),
     ecr (>= 2.1.0),
@@ -31,4 +33,5 @@ Suggests:
     knitr,
     rmarkdown
 URL: https://github.com/marchtaylor/mantelNSGA2
+BugReports: https://github.com/marchtaylor/mantelNSGA2/issues/
 VignetteBuilder: knitr
